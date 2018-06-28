@@ -10,7 +10,19 @@ class Home extends Component {
 
   render() {
     console.log(this.props.users);
-    return <div>Photos</div>;
+    const { users } = this.props;
+
+    if (users.loading) {
+      return <div>loading</div>;
+    }
+
+    if (users.success) {
+      return users.data.map(user => {
+        return <div key={user.id}>{user.name}</div>;
+      });
+    }
+
+    return null;
   }
 }
 
